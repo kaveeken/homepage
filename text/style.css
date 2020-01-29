@@ -1,0 +1,50 @@
+@media only screen {
+  body {
+    background: #222;
+    color: #fff;
+    font-family: "Liberation Sans", sans-serif;
+  }
+  header {
+    margin: 0 0 5px 0;
+  }
+  main {
+    border: 4px solid #8fbc8f;
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 20px;
+  }
+  h1:first-of-type {
+    background: #443d4a;
+    border-bottom: 4px solid #8fbc8f;
+    font-family: monospace;
+    margin: -20px -20px 20px -20px;
+    padding: 20px;
+  }
+  a {
+    color: #8fbc8f;
+  }
+
+  #design-blog article > p:first-of-type {
+    font-style: italic;
+  }
+  .entry{
+      padding:10px;
+      border-radius: 0 10px 30px 0;
+      margin-bottom: 20px;
+      background: #443d4a;
+      border-left: 10px solid #8fbc8f;
+  }
+  .entry h2 {
+      margin: 5px auto 2px auto;
+  }
+  /*
+  ul .heading {font-weight: normal; list-style: none;}
+  ul:before{
+    content:attr(data-header);
+    font-size:120%;
+    margin-left:-40px;
+  }
+  */
+  h2 { margin: 0; display: inline }
+  ul { margin-top: 0; }
+}
