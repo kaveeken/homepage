@@ -27,7 +27,7 @@
     </p>
     <h2>Some Links</h2>
     <ul>
-	    <!--      <li><a href="mailto:mail@krisveeken.nl">mail@krisveeken.nl</a></li> -->
+	    <li><a href="mailto:mail@krisveeken.nl">mail@krisveeken.nl</a></li>
       <li><a href="pdf/cv.pdf">My CV</a> (pdf)</li>
       <li><a href="https://github.com/kaveeken">GitHub</a></li>
     </ul>
@@ -49,7 +49,7 @@
     </div>
       -->
     <div class='entry'>
-      <h2 id='#mreg1'>Momentum Regression</h2><br>
+      <h2 id='mreg1'>Momentum Regression</h2><br>
         <b>Or: The <i>real</i> getting filthy rich off crypto is the things you
         learn along the way!</b>
       <p>
@@ -59,10 +59,19 @@
         so I'm writing this to re-familiarize myself with what I
         was doing.
       </p>
+      <p>
+        Trying to 'solve' fincancial markets is very appealing,
+        as they feature high levels of complexity as well as obvious incentives.
+        Cryptocurrencies at this point offer the most approachable markets,
+        so they are a clear fit for an exploratory project.
+        The approach of this project is to predict the direction of a market
+        using relatively simple line regressions.
+      </p>
+
       <!-- 1355x582 -->
       <figure>
       <img src="images/sine.png" alt="sine" width=100%>
-      <figcaption>Figure 1: upwards trending sine wave.</figcaption>
+      <figcaption>Figure 1: Upwards trending sine wave.</figcaption>
       </figure>
 
       <p>
@@ -74,7 +83,7 @@
       </p>
       <figure>
       <img src="images/expfit.png" alt="expfit" width=100%>
-      <figcaption>Figure 2: exponential fit of part of the sine wave. The fits
+      <figcaption>Figure 2: Exponential fit of part of the sine wave. The fits
       I show are all eyeballed.</figcaption>
       </figure>
 
@@ -91,7 +100,7 @@
       </p>
       <figure>
       <img src="images/linfit.png" alt="linfit" width=100%>
-      <figcaption>Figure 3: fit of linear phase.</figcaption>
+      <figcaption>Figure 3: Fit of linear phase.</figcaption>
       </figure>
 
       <p>
@@ -102,14 +111,94 @@
         This part we can fit with regular old linear regression.
       </p>
       <p>
+        Now, if we continually try to fit exponential functions to price data,
+        we can identify buy signals based on the values <i>&alpha;</i>
+        and <i>&beta;</i> in <i>&alpha;e<sup>&beta;x</sup></i> as well as the
+        quality of fit.
+        Effectively, these three properties are a measure of
+        upwards <i>momentum</i>, arrived at through line <i>regression</i> (I still
+        think I can do better with the name).
       </p>
       <p>
+        Sell signals, then, are when momentum is lost.
+        There's multiple ways of handling this, but let's just consider the
+        linear phase the time we want to sell.
+        With these things in mind, I set out to find
+        some <a href="https://www.kaggle.com/tencars/392-crypto-currency-pairs-at-minute-resolution">
+        price data</a> to mess around with.
       </p>
       <p>
+        Starting out in python, I did not understand the buy/sell signals I was
+        getting out of backtests.
+        Wanting to dig a little deeper but not knowing my way around the
+        libraries I was using, I decided to build my own linear regression
+        program in C++.
+        On top of being able to better interpret what was going on,
+        this had the nice effect of speeding up my backtesting considerably
+        (moreover, I had been wanting to work on an optimization problem
+        for a while).
       </p>
       <p>
+        Everything eventually led to a fevered week of me being convinced I
+        would make absurd amounts of money.
+        That is, until I checked what kind of commissions I would be paying, as
+        well as the losses I'd take on buy/sell spread.
+        As it turns out, getting rich off internet money is more difficult than
+        I thought.
       </p>
       <p>
+        I'll be going over a number of problems I encountered. Some of those
+        problems I don't believe can be solved, but there should be ways to make
+        this method profitable.
+      </p>
+      <figure>
+        <img style="float:left" src="images/trade_6.png" alt="trade6" width=50%>
+        <img style="float:right" src="images/trade_2.png" alt="trade2" width=50%>
+        <figcaption>Figure 4: Two examples of actual trades. Bought at time 900
+          (vertical line) and sold at last datapoint.</figcaption>
+      </figure>
+      <p>
+        The first problem I encountered was that oftentimes,
+        fitted exponential functions are very flat,
+        and even if they are more sharp,
+        a lot of times it is possible to fit linear functions with a comparable level of
+        confidence.
+        The left image in figure 4 spotlights this.
+        I haven't been able to properly add the fitted functions into price
+        data plots, but it's easy to see that you can draw both exponential and
+        linear functions.
+        The workaround here is that I force the program to hold off selling by
+        scaling the linear fit's required confidence level with elapsed time.
+        However, this leads to cases such as the right image, where selling
+        quickly would be preferable.
+        Generally in the real world, the exponential phase appears to be slower
+        than the other parts of the sinus curve.
+      </p>
+      <p>
+        Another problem is that there are a lot of parameters to consider,
+        and the more time I put into this project the more tweakable quantities
+        I find.
+        Finding an optimal configuration explodes in complexity.
+        Then, even if you find an optimum,
+        it is potentially highly biased by the dataset you've used for
+        backtesting.
+        This problem doesn't simply go away.
+        It may help to find a way to characterize your datasets,
+        and specify different parameter sets for different types of market.
+        If it is possible to generate meaningful characterizations,
+        I'd guess an unsupervised machine learning algorithm would be
+        pretty good at this kind of thing.
+      </p>
+      <p>
+        This entry is turning out longer than I had anticipated, so I'm going to
+        stop here.
+        I don't know if I'll end up beating the market with this approach: it
+        will probably involve stacking a bunch more complexity on top of my
+        current methods, at which point the effort may just become too large.
+        At least I will have learned a lot in the process.
+        Even a simple optimization problem such as linear regression
+        featured bumps in the road, for instance, and I look forward looking
+        into machine learning now that I have a suitable reason to.
       </p>
       <small>
         <a href='#top'>To top of page</a>
