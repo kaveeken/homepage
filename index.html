@@ -49,13 +49,71 @@
     </div>
       -->
     <div class='entry'>
-      <h2 id='#mreg1'>Momentum Regression</h2>
+      <h2 id='#mreg1'>Momentum Regression</h2><br>
+        <b>Or: The <i>real</i> getting filthy rich off crypto is the things you
+        learn along the way!</b>
       <p>
-      Something here
+        I have a bunch of time on my hands after finishing an assistantship, so
+        I figure I should put some of it into a project.
+        It's been a while since I've worked on this one,
+        so I'm writing this to re-familiarize myself with what I
+        was doing.
+      </p>
+      <!-- 1355x582 -->
+      <figure>
+      <img src="images/sine.png" alt="sine" width=100%>
+      <figcaption>Figure 1: upwards trending sine wave.</figcaption>
+      </figure>
+
+      <p>
+        The underlying assumption of what I've now called <i>momentum regression</i> (why
+        it's called that will become clear later) is that markets generally move with
+        a sinusoid pattern through time, as shown in figure 1.
+        This assumption kind of holds, but sadly, as you will read below,
+        reality is a lot more messy.
+      </p>
+      <figure>
+      <img src="images/expfit.png" alt="expfit" width=100%>
+      <figcaption>Figure 2: exponential fit of part of the sine wave. The fits
+      I show are all eyeballed.</figcaption>
+      </figure>
+
+      <p>
+        Still, if the general pattern holds, we can try to identify troughs, peaks,
+        and everything in between.
+        Notice that the start of an upwards movement in a sine wave can be
+        approximated by an exponential function (figure 2).
+        The fitting of exponential functions is reasonably straightforward:
+        performing linear regression on the straight line that results from taking the
+        natural logarithm of an exponential set of data:<br>
+        <i>ln(e<sup>x</sup>) = x</i>.
+        I call this part of the curve the <i>exponential phase</i>.
+      </p>
+      <figure>
+      <img src="images/linfit.png" alt="linfit" width=100%>
+      <figcaption>Figure 3: fit of linear phase.</figcaption>
+      </figure>
+
+      <p>
+        Similarly, we can fit other parts of the sinus curve, including the linear
+        growth, logarithmic growth and exponential decrease (short selling!) parts.
+        For now I'll only talk about the <i>linear phase</i>,
+        which is illustrated in figure 3.
+        This part we can fit with regular old linear regression.
+      </p>
+      <p>
+      </p>
+      <p>
+      </p>
+      <p>
+      </p>
+      <p>
+      </p>
+      <p>
       </p>
       <small>
         <a href='#top'>To top of page</a>
-        <span style="float:right;"> Tue, 28 Jan 2020 &nbsp;</span>
+        <span style="float:right;"> Wed, 29 Jan 2020 &nbsp;</span>
       </small>
     </div>
     <div class='entry'>
